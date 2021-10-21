@@ -31,23 +31,25 @@ function renderList() {
   for (let i = 0; i < toDosOb.length; i++) {
     $("#toDo").append(`<li id ="li${i}""></li>`);
 
-    if (toDosOb[i].c)
+    if (toDosOb[i].c) {
       $(`#li${i}`).append(
         `<a id = "a${i}" href = "#" class = "main" onclick="itemCompleted(${i})" >${toDosOb[i].n}</li>`
       );
-    else {
       count++;
+    } else {
       $(`#li${i}`).append(
         `<a id = "a${i}" href = "#" class = "main" onclick="itemCompleted(${i})" style="text-decoration:line-through" >${toDosOb[i].n}</li>`
       );
     }
 
-    $(`#li${i}`).append(
-      `<a id = "${i}" href = "#" class = "aStyle" onclick="updateListItem(${i})">EDIT</li>`
+    $(`#li${i}`).append(`<span id = "span${i}"> </span>`);
+
+    $(`#span${i}`).append(
+      `<a id = "ShowHide" href = "#" class = "aStyle" onclick="updateListItem(${i})">EDIT</li>`
     );
 
-    $(`#li${i}`).append(
-      `<a id = "${i}" href = "#" class = "aStyle" onclick="deleteListItem(${i})">REMOVE</li>`
+    $(`#span${i}`).append(
+      `<a id = "ShowHide" href = "#" class = "aStyle" onclick="deleteListItem(${i})">REMOVE</li>`
     );
   }
   console.log(count);
@@ -79,6 +81,14 @@ const clearCompleted = () => {
 const clear = () => {
   toDosOb.length = 0;
   renderList();
+};
+
+const showBtn = () => {
+  $("span").show();
+};
+
+const hideBtn = () => {
+  $("span").hide();
 };
 
 $("#btn1").click(addToList);
